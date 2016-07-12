@@ -1,0 +1,236 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include <stdlib.h>
+
+using namespace std;
+
+struct menuitem
+{
+	string itemname;
+	double itemprice;
+};
+
+//functions
+void getdata(ifstream&in, menuitem menulist[]);
+void showmenu(menuitem menulist[]);
+double takeorder(menuitem menulist[]);
+
+int main()
+{
+
+	menuitem menulist[10];
+
+	ifstream in;
+	in.open("menu.txt");
+
+	getdata(in, menulist);
+	showmenu(menulist);
+	takeorder(menulist);
+
+	
+
+
+}
+
+//while does not reach end of file, store items into menu list
+void getdata(ifstream&in, menuitem menulist[])
+{
+	char dummy;
+	int i = 0;
+	while (!in.eof())
+	{
+		getline(in, menulist[i].itemname);
+		in >> menulist[i].itemprice;
+		in.get(dummy);		
+		++i;
+	}
+}
+//welcome screen, displays menu to user
+void showmenu(menuitem menulist[])
+{
+
+
+	cout << fixed << setprecision(2);
+	cout << "Welcome to Kelly's Cafe! \n\n" << endl;
+	cout << "\t\t" << right << setfill(' ') << "1.  " << menulist[0].itemname
+		<< setw(0) << left << setfill(' ') << "            $" << menulist[0].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "2.  " << menulist[1].itemname
+		<< setw(0) << left << setfill(' ') << "          $" << menulist[1].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "3.  " << menulist[2].itemname
+		<< setw(0) << left << setfill(' ') << "               $" << menulist[2].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "4.  " << menulist[3].itemname
+		<< setw(0) << left << setfill(' ') << "         $" << menulist[3].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "5.  " << menulist[4].itemname
+		<< setw(0) << left << setfill(' ') << "         $" << menulist[4].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "6.  " << menulist[5].itemname
+		<< setw(0) << left << setfill(' ') << "               $" << menulist[5].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "7.  " << menulist[6].itemname
+		<< setw(0) << left << setfill(' ') << "               $" << menulist[6].itemprice << "\n"
+
+		<< "\t\t" << right << setfill(' ') << "8.  " << menulist[7].itemname
+		<< setw(0) << left << setfill(' ') << "                  $" << menulist[7].itemprice << "\n\n";
+
+
+}
+
+double takeorder(menuitem menulist[])
+{
+	int selection;
+	int qty;
+	double tax = 0.05;
+	int choice = 0;
+	double total = 0;
+	string answer;
+
+
+	//while choice is a menu item number, get a quantity
+	while (choice >= 0 && choice <= 8)
+	{
+		cout << "\nWhat would you like to order? (Please enter numbers)\n";
+		cin >> selection;
+		choice++;
+		if (choice > 0)
+		{
+			cout << "Quantity? \n";
+			cin >> qty;
+		}
+		// check and mach menu items to price
+
+		if (choice == 1)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+			//calculate total and continue loop
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+
+			//if order is done, end of program
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+
+		}
+
+		else if (choice == 2)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+
+		else if (choice == 3)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+
+		else if (choice == 4)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+
+		else if (choice == 5)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+		else if (choice == 6)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+		else if (choice == 7)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+
+		else if (choice == 8)
+		{
+			cout << qty << "x" << " " << menulist[selection - 1].itemname << "   @ " << menulist[selection - 1].itemprice << endl;
+
+			total = total + (menulist[selection - 1].itemprice * qty);
+			cout << "your current total is: " << total << "\n\n";
+			cout << "\nanything else? (yes/no)\n";
+			cin >> answer;
+			if (answer == "no")
+			{
+				cout << "\n\nTax = 5%\nYour Total is: " << total + (total * tax) << "\nPlease pay at the front desk. \nThank you.\nHave a good day!\n\n" << endl;
+				break;
+			}
+		}
+
+	}
+
+	return total;
+}
+
+
+
+
+

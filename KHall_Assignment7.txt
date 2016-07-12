@@ -1,0 +1,134 @@
+#include "header.h"
+
+int main()
+{
+	string file, greeting, fname, lname, farewell, name = string();
+	//double score;
+	char grade = char();
+	double total;
+	double average;
+	int counter;
+	bool flag;
+	string filename;
+
+	introduction(greeting);
+
+
+	//reads file name
+	cout << "Please enter your file name: " << endl;
+	cin >> filename;
+	filename = filename + ".txt";
+	cout << '\n';
+
+	ifstream in;
+	in.open(filename.c_str());
+
+	//while not end of file
+	while (!in.eof())
+	{
+		total = 0, counter = 0;
+		getName(in, fname, lname);
+		cout << fname << " " << lname << " " << endl;
+	}
+
+	
+}
+
+
+void introduction(string& greeting)
+{
+	cout << "Hello, This program will take in your file and receive your grades." << endl;
+
+}
+
+void getName(ifstream& in, string& fname, string& lname)
+{
+
+		in >> fname >> lname;
+
+}
+
+bool getScores(ifstream& in, double& total, int& counter)
+{
+	double score;
+	bool flag = true;
+
+	//while it does not reach new line or end of file
+	while (in.peek() != '\n' && !in.eof())
+	{
+		score = -1;
+		in >> score;
+		++counter;
+		while (in.fail())
+		{
+			in.clear();
+			in.ignore(1, '\n');
+			if (in.peek() != '\n' && !in.eof())
+				in >> score;
+		}
+		if (score >= 0)
+		{
+			cout << score << " ";
+			total = total + score; 
+			flag = false;
+		}
+
+	}
+	return flag;
+
+}
+//if file has an error
+void reportnoScore()
+{
+	cout << "No scores were read.\n" << endl;
+}
+
+//calculates average from total and counter
+double calculateAverage(double& total, int& counter)
+{
+	double average;
+	average = total / counter;
+	return average;
+}
+
+//calculates grade from average
+char assignGrade(double& average)
+{
+	char grade;
+	if (average < 59)
+		{
+		grade = 'F';
+		}
+	else if (average >= 60 && average <= 69)
+		{
+		grade = 'D';
+		}
+	else if (average >= 70 && average <= 79)
+		{
+		grade = 'C';
+		}
+	else if (average >= 80 && average <= 89)
+		{
+		grade = 'B';	
+		}
+	else
+		{
+		grade = 'A';
+		}
+	return grade;
+}
+			
+void printData(string& fname, string& lname, double& total, double& average, char& grade)
+{
+	cout << "\n" << "Total: " << total << " " << "average: " << average << " " << "grade: " << grade << "\n" << endl;
+
+}
+
+void end(string& farewell)
+{
+	cout << "\n\n" << "End of File." << endl;
+}
+
+
+
+
